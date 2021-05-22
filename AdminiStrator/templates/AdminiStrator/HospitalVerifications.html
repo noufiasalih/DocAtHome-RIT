@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table align="center" border="1" cellpadding="10" style="border-collapse: collapse;">
+        <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Type</th>
+            <th colspan="2">Actions</th>
+        </tr>
+
+        {% for Data in HospitalData %}
+        <tr>
+            <td>{{ Data.hospital_name }}</td>
+            <td>{{ Data.hospital_contact }}</td>
+            <td>{{ Data.hospital_email }}</td>
+            <td>{{ Data.hospital_address }}</td>
+            <td>{{ Data.hospital_type }}</td>
+            <td><img src="{{Data.hospital_image.url}}" width="120" height="120"></td>
+            
+            <td colspan="2">
+                <a href="{% url 'AdminiStrator:accept-hospitals' Data.id %}">Accept</a>
+                <a href="{% url 'AdminiStrator:reject-hospitals' Data.id %}">Reject</a>
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+
+
+
+</body>
+</html>

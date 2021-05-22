@@ -1,0 +1,16 @@
+AccountsApp
+-------
+1)User Registration
+2)User Login
+
+
+HospitalApp
+----------
+1)ManagaeServices
+2)ManagePackageServices
+3)SendComplaints
+
+
+AdminiStrator
+-------------
+1)ViewHospitalComplanits

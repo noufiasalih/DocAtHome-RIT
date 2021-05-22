@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h2>User Login</h2>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocAtHome||User Sign in</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table border="`1" cellpadding="10" style="border-collapse:collapse;">
+            <tr>
+                <td>Username</td>
+                <td><input type="text" name="txtUsername1"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="txtPassword1"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="btnLogin" value="signin">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

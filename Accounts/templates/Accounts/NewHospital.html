@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h2>Hospital Registration</h2>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'Accounts:HospitalSignup' %}" id="transac_form" data-cities-url="{% url 'Accounts:AjaxPlaces' %}">
+    {% csrf_token %}
+    <table align="center" style="border-collapse: collapse;" border="1" cellpadding="10">
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="txtHname"></td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td><input type="text" name="txtHcontact"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="email" name="txtHemail"></td>
+        </tr>
+        <tr>
+            <td>District</td>
+            <td>
+                <select name="slctDistrict" id="slctDistrict" onchange="LoadPlace(this.value)">
+                    <option>---Select---</option>
+                    {% for DistrictData in DistrictRecords %}
+                    <option value="{{ DistrictData.id }}">{{ DistrictData.district_name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Place</td>
+            <td>
+                <select name="slctPlace" id="slctPlace">
+                    <option>---Select---</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td><textarea name="txtHospitalAddress"></textarea></td>
+        </tr>
+        <tr>
+            <td>Hospital Type</td>
+            <td>
+                <select name="slctHtype" id="slctHtype">
+                    <option>---Select---</option>
+                    {% for HospitaltypeData in HospitalTypeRecords %}
+                    <option value="{{ HospitaltypeData.id }}">{{ HospitaltypeData.hospitaltype_name }}</option>
+                    {% endfor %}
+                </select>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>Proof</td>
+            <td><input type="file" name="fileHProof" id=""></td>
+        </tr>
+        <tr>
+            <td>Image</td>
+            <td><input type="file" name="fileHImage" id="fileHImage"></td>
+        </tr>
+        <tr>
+            <td>User name</td>
+            <td><input type="text" name="txtUsername" id="txtUsername"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="text" name="txtPassword" id="txtPassword"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Register Now"></td>
+        </tr>
+    </table>
+    {{Message}}
+    </form>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        function LoadPlace(did){
+          //alert("hii")
+          var url = $("#transac_form").attr("data-cities-url");  
+          var districtSelected = did 
+          //alert(districtSelected)
+          $.ajax({                      
+            url: url,                   
+            data: {
+              'districtid': districtSelected       
+            },
+            success: function (data) { 
+                //alert(data)  
+              $("#slctPlace").html(data);  
+            }
+          });
+        }
+    
+    
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

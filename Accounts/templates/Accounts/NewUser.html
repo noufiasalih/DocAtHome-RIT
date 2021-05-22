@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h2><center>User Registration</h2></center>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data" action="{% url 'Accounts:UserSignup' %}" id="transac_form" data-cities-url="{% url 'Accounts:AjaxPlaces' %}">
+    {% csrf_token %}
+    <table align="center" style="border-collapse: collapse;" border="1" cellpadding="10">
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="txtUname"></td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td><input type="text" name="txtUcontact"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="email" name="txtUemail"></td>
+        </tr>
+        <tr>
+            <td>Place</td>
+           <td><input type="place" name="txtUplace"></td>
+        </tr>
+        <tr>
+           
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>Male<input type="radio" id="male" name="Ugender" value="Male">&nbsp;&nbsp;
+                Female<input type="radio" id="female" name="Ugender" value="FeMale"></td>
+        </tr>
+       
+        <tr>
+            <td>User name</td>
+            <td><input type="text" name="txtUsername" id="txtUsername"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="text" name="txtPassword" id="txtPassword"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Register Now"></td>
+        </tr>
+    </table>
+    {Message}
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
