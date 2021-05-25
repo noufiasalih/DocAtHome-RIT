@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from MasterEntry.models import District,Place,HospitalType
 from .models import Hospital, Users
@@ -32,7 +32,7 @@ def Userlogin(request):
                 'Usersid':request.session["sessionUsersId"],
                 'Usersname': request.session["sessionUsersname"],
             }
-            template=loader.get_template("Accounts/NewHospital.html")
+            template=loader.get_template("user/Homepage.html")
             
             return HttpResponse(template.render(context,request))
         else:
@@ -77,7 +77,6 @@ def RegisterHospital(request):
         hospitalObj.hospital_name=request.POST.get("txtHname")
         hospitalObj.hospital_contact=request.POST.get("txtHcontact")
         hospitalObj.hospital_email=request.POST.get("txtHemail")
-        hospitalObj.hospital_place=request.POST.get("slctPlace")
         hospitalObj.hospital_address=request.POST.get("txtHospitalAddress")
         
         hospitaltypeObj=HospitalType.objects.get(id=request.POST.get("slctHtype"))
@@ -90,8 +89,9 @@ def RegisterHospital(request):
         hospitalObj.hospital_image=request.FILES.get("fileHImage")
         hospitalObj.hospital_username=request.POST.get("txtUsername")
         hospitalObj.hospital_password=request.POST.get("txtPassword")
+        hospitalObj.hospital_status=1
         hospitalObj.save()
-        return render(request,"Accounts/NewHospital.html",{'DistrictRecords':DistrictRecords,'HospitalTypeRecords':HospitalTypeRecords,"Message":"Success"})
+        return redirect('/accounts/hospitalLogin')
     else:
         return render(request,"Accounts/NewHospital.html",{'DistrictRecords':DistrictRecords,'HospitalTypeRecords':HospitalTypeRecords})
         
@@ -100,7 +100,7 @@ def RegisterHospital(request):
      #----------------------------------------------------------------------------------------------------------------------------
         
 def RegisterUser(request):
-    if request.method=="POST" and request.FILES :
+    if request.method=="POST" :
         usersObj=J=Users()
         usersObj.user_name=request.POST.get("txtUname")
         usersObj.user_contact=request.POST.get("txtUcontact")
@@ -109,8 +109,11 @@ def RegisterUser(request):
         usersObj.user_gender=request.POST.get("Ugender")
         usersObj.user_username=request.POST.get("txtUsername")
         usersObj.user_password=request.POST.get("txtPassword")
+        usersObj.user_status=1
         usersObj.save()
-        return render(request,"Accounts/NewUser.html",{"Message":"Success"})
+        return redirect('/accounts/userLogin')
     else:
-        return render(request,"Accounts/NewUser.html")
-            
+        return render(request,"Accounts/NewUser.html")   
+
+def Registration(request) :
+    return render(request,"Accounts/Registration.html")

@@ -1,121 +1,267 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <h2>Hospital Registration</h2>
+<html lang="en" ><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="POST" enctype="multipart/form-data" action="{% url 'Accounts:HospitalSignup' %}" id="transac_form" data-cities-url="{% url 'Accounts:AjaxPlaces' %}">
-    {% csrf_token %}
-    <table align="center" style="border-collapse: collapse;" border="1" cellpadding="10">
-        <tr>
-            <td>Name</td>
-            <td><input type="text" name="txtHname"></td>
-        </tr>
-        <tr>
-            <td>Contact</td>
-            <td><input type="text" name="txtHcontact"></td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td><input type="email" name="txtHemail"></td>
-        </tr>
-        <tr>
-            <td>District</td>
-            <td>
-                <select name="slctDistrict" id="slctDistrict" onchange="LoadPlace(this.value)">
-                    <option>---Select---</option>
-                    {% for DistrictData in DistrictRecords %}
-                    <option value="{{ DistrictData.id }}">{{ DistrictData.district_name }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Place</td>
-            <td>
-                <select name="slctPlace" id="slctPlace">
-                    <option>---Select---</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Address</td>
-            <td><textarea name="txtHospitalAddress"></textarea></td>
-        </tr>
-        <tr>
-            <td>Hospital Type</td>
-            <td>
-                <select name="slctHtype" id="slctHtype">
-                    <option>---Select---</option>
-                    {% for HospitaltypeData in HospitalTypeRecords %}
-                    <option value="{{ HospitaltypeData.id }}">{{ HospitaltypeData.hospitaltype_name }}</option>
-                    {% endfor %}
-                </select>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>Proof</td>
-            <td><input type="file" name="fileHProof" id=""></td>
-        </tr>
-        <tr>
-            <td>Image</td>
-            <td><input type="file" name="fileHImage" id="fileHImage"></td>
-        </tr>
-        <tr>
-            <td>User name</td>
-            <td><input type="text" name="txtUsername" id="txtUsername"></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="text" name="txtPassword" id="txtPassword"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Register Now"></td>
-        </tr>
-    </table>
-    {{Message}}
-    </form>
-
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css">
+    
+    <style>
+        #success_message{ display: none;}
+    </style>
     <script>
+        window.console = window.console || function(t) {};
+    </script>
+    <script>
+        if (document.location.search.match(/type=embed/gi)) {
+        window.parent.postMessage("resize", "*");
+        }
+    </script>
+  </head>
+  <body translate="no">
+    <div class="container">
+  
+        <form method="POST" autocomplete="off" class="well form-horizontal bv-form" enctype="multipart/form-data" novalidate="novalidate" action="{% url 'Accounts:HospitalSignup' %}" id="transac_form" data-cities-url="{% url 'Accounts:AjaxPlaces' %}">
+            {% csrf_token %}
+            <fieldset>
+            
+            <legend><center><h2><b>Registration Form</b></h2></center></legend><br>
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">Name</label>  
+                <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="txtHname" placeholder="Name" class="form-control" type="text" data-bv-field="txt_name"><i class="form-control-feedback" data-bv-icon-for="txt_name" style="display: none;"></i>
+                </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="txt_name" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="txt_name" class="help-block" style="display: none;">Please enter your Name</small></div>
+            </div>
+            
+            
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">Contact</label> 
+                <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="txtHcontact" placeholder="Contact" class="form-control" type="text" data-bv-field="txt_contact"><i class="form-control-feedback" data-bv-icon-for="txt_contact" style="display: none;"></i>
+                </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="txt_contact" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="txt_contact" class="help-block" style="display: none;">Please enter contact</small></div>
+            </div>
+
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">E-Mail</label>  
+                <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input name="txtHemail" id="txtHemail" placeholder="E-Mail Address" class="form-control" type="text" data-bv-field="email"><i class="form-control-feedback" data-bv-icon-for="email" style="display: none;"></i>
+                </div>
+                <small data-bv-validator="notEmpty" data-bv-validator-for="email" class="help-block" style="display: none;">Please enter your Email Address</small><small data-bv-validator="emailAddress" data-bv-validator-for="email" class="help-block" style="display: none;">Please enter a valid Email Address</small></div>
+            </div>
+            
+            <div class="form-group"> 
+                <label class="col-md-4 control-label">District</label>
+                <div class="col-md-4 selectContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select name="slctDistrict" id="slctDistrict" onchange="LoadPlace(this.value)" class="form-control selectpicker">
+                            <option>---Select---</option>
+                            {% for DistrictData in DistrictRecords %}
+                            <option value="{{ DistrictData.id }}">{{ DistrictData.district_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group"> 
+                <label class="col-md-4 control-label">Place</label>
+                <div class="col-md-4 selectContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select name="slctPlace" id="slctPlace" class="form-control selectpicker">
+                            <option>---Select---</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">Address</label>  
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <textarea name="txtHospitalAddress" class="form-control" placeholder="address" data-bv-field="txt_HospitalAddress"></textarea><i class="form-control-feedback"
+                        data-bv-icon-for="txt_HospitalAddress" style="display: none;"></i>
+                    </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="txt_HospitalAddress" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="txt_HospitalAddress" class="help-block" style="display: none;">Please enter the address</small></div>
+            </div>
+
+            <div class="form-group"> 
+                <label class="col-md-4 control-label">Hospital Type</label>
+                <div class="col-md-4 selectContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select name="slctHtype" id="slctHtype" class="form-control selectpicker">
+                            <option>---Select---</option>
+                            {% for HospitaltypeData in HospitalTypeRecords %}
+                            <option value="{{ HospitaltypeData.id }}">{{ HospitaltypeData.hospitaltype_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">Proof</label> 
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="fileHProof" class="form-control" type="file" data-bv-field="file_Proof"><i class="form-control-feedback" data-bv-icon-for="file_Proof" style="display: none;"></i>
+                    </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="file_Proof" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="file_Proof" class="help-block" style="display: none;">Please upload proof</small></div>
+            </div>
+
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">Image</label> 
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="fileHImage" id="fileHImage" class="form-control" type="file" data-bv-field="file_Image"><i class="form-control-feedback" data-bv-icon-for="file_Image" style="display: none;"></i>
+                    </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="file_Image" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="file_Image" class="help-block" style="display: none;">Please upload image</small></div>
+            </div>
+                
+            
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">User name</label>  
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="txtUsername" id="txtUsername" placeholder="Username" class="form-control" type="text" data-bv-field="txt_Username"><i class="form-control-feedback" data-bv-icon-for="txt_Username" style="display: none;"></i>
+                    </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="txt_Username" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="txt_Username" class="help-block" style="display: none;">Please enter Username</small></div>
+            </div>
+            
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">Password</label> 
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="txtPassword" id="txtPassword" placeholder="Password" class="form-control" type="password" data-bv-field="txt_Password"><i class="form-control-feedback" data-bv-icon-for="txt_Password" style="display: none;"></i>
+                    </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="txt_Password" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="txt_Password" class="help-block" style="display: none;">Please enter the Password</small></div>
+            </div>
+        
+            <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Success!.</div>
+            
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4"><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-warning">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register Now <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                
+                </div>
+            </div>
+            
+            </fieldset>
+  <input type="hidden" value=""></form>
+  </div>
+      <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
+      <script id="rendered-js">
+        $(document).ready(function () {
+            $('#transac_form').bootstrapValidator({
+            
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh' },
+        
+            fields: {
+                txt_name: {
+                validators: {
+                    stringLength: {
+                    min: 2 },
+        
+                    notEmpty: {
+                    message: 'Please enter the Name' } } },
+
+                txt_contact: {
+                validators: {
+                    stringLength: {
+                    min: 2 },
+        
+                    notEmpty: {
+                    message: 'Please enter the contact' } } },
+        
+                user_name: {
+                validators: {
+                    stringLength: {
+                    min: 8 },
+        
+                    notEmpty: {
+                    message: 'Please enter the Username' } } },
+        
+                txt_Password: {
+                validators: {
+                    stringLength: {
+                    min: 8 },
+        
+                    notEmpty: {
+                    message: 'Please enter the Password' } } },
+        
+                email: {
+                validators: {
+                    notEmpty: {
+                    message: 'Please enter the Email Address' },
+        
+                    emailAddress: {
+                    message: 'Please enter a valid Email Address' } } },
+        
+                } }).
+                alert("hi");
+            on('success.form.bv', function (e) {
+                alert("hii")
+            $('#success_message').slideDown({ opacity: "show" }, "slow"); // Do something ...
+            $('#transac_form').data('bootstrapValidator').resetForm();
+        
+            // Prevent form submission
+            e.preventDefault();
+        
+            // Get the form instance
+            var $form = $(e.target);
+        
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+        
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function (result) {
+                console.log(result);
+            }, 'json');
+            });
+        });
         function LoadPlace(did){
-          //alert("hii")
-          var url = $("#transac_form").attr("data-cities-url");  
-          var districtSelected = did 
-          //alert(districtSelected)
-          $.ajax({                      
+            var url = $("#transac_form").attr("data-cities-url");  
+            var districtSelected = did 
+            $.ajax({                      
             url: url,                   
             data: {
-              'districtid': districtSelected       
+                'districtid': districtSelected       
             },
             success: function (data) { 
-                //alert(data)  
-              $("#slctPlace").html(data);  
+                $("#slctPlace").html(data);  
             }
-          });
+            });
         }
-    
-    
-      </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</script>
+<script>
+    $('form').attr('autocomplete','off');
+</script>
+</body></html>

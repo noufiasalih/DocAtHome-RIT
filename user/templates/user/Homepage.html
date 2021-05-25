@@ -2,18 +2,15 @@
 <html lang="en" ><head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <script>
-        window.console = window.console || function(t) {};
-    </script>
   </head>
   <body translate="no">
     <div class="container">
         <form action="" method="post" class="well form-horizontal bv-form" novalidate="novalidate" id="login_form">
-            <legend><center><h2>Welcome <b>{{ request.session.sessionHospitalname }}</b> </h2></center></legend><br>
+            <legend><center><h2>Welcome <b>{{ request.session.sessionUsername }}</b> </h2></center></legend><br>
             <br>
-            <b>Hospital Portal</b>
-            <a href="{% url 'Hospital:hospital-homepage'%}">Homepage</a>
-            <a href="{% url 'Hospital:hospital-profile'%}">View Profile</a>
+            <b>User Portal</b>
+            <a href="{% url 'user:user-homepage'%}">Homepage</a>
+            <a href="{% url 'user:user-profile'%}">View Profile</a>
         </form>
     </div>
   </body>

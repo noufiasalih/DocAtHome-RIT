@@ -23,6 +23,7 @@ urlpatterns = [
     path('accounts/',include('Accounts.urls')),
     path('administrator/',include("AdminiStrator.urls")),
     path('hospital/',include("Hospital.urls")),
+    path('user/',include("user.urls")),
 ]
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,

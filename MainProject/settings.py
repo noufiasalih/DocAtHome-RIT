@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'MasterEntry',
     'Accounts',
     'AdminiStrator',
-    'Hospital'
+    'Hospital',
+    'user'
 ]
 
 MIDDLEWARE = [

@@ -9,11 +9,10 @@
   <body translate="no">
     <div class="container">
         <form action="" method="post" class="well form-horizontal bv-form" novalidate="novalidate" id="login_form">
-            <legend><center><h2>Welcome <b>{{ request.session.sessionHospitalname }}</b> </h2></center></legend><br>
+            <legend><center><h2>Registration</b> </h2></center></legend><br>
             <br>
-            <b>Hospital Portal</b>
-            <a href="{% url 'Hospital:hospital-homepage'%}">Homepage</a>
-            <a href="{% url 'Hospital:hospital-profile'%}">View Profile</a>
+            <a href="{% url 'Accounts:UserSignup' %}" style="text-decoration: underline;">User Registration</a>
+            <a href="{% url 'Accounts:HospitalSignup' %}" style="text-decoration: underline;" >Hospital Registration</a>
         </form>
     </div>
   </body>

@@ -1,55 +1,207 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <h2><center>User Registration</h2></center>
-
+<html lang="en" ><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="POST" enctype="multipart/form-data" action="{% url 'Accounts:UserSignup' %}" id="transac_form" data-cities-url="{% url 'Accounts:AjaxPlaces' %}">
-    {% csrf_token %}
-    <table align="center" style="border-collapse: collapse;" border="1" cellpadding="10">
-        <tr>
-            <td>Name</td>
-            <td><input type="text" name="txtUname"></td>
-        </tr>
-        <tr>
-            <td>Contact</td>
-            <td><input type="text" name="txtUcontact"></td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td><input type="email" name="txtUemail"></td>
-        </tr>
-        <tr>
-            <td>Place</td>
-           <td><input type="place" name="txtUplace"></td>
-        </tr>
-        <tr>
-           
-        </tr>
-        <tr>
-            <td>Gender</td>
-            <td>Male<input type="radio" id="male" name="Ugender" value="Male">&nbsp;&nbsp;
-                Female<input type="radio" id="female" name="Ugender" value="FeMale"></td>
-        </tr>
-       
-        <tr>
-            <td>User name</td>
-            <td><input type="text" name="txtUsername" id="txtUsername"></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="text" name="txtPassword" id="txtPassword"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Register Now"></td>
-        </tr>
-    </table>
-    {Message}
-    </form>
-    
-</body>
-</html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css">
+  </head>
+  <body translate="no">
+    <div class="container">
+  
+      <!-- <form class="well form-horizontal bv-form" action=" " method="post" id="transac_form" novalidate="novalidate"> -->
+        
+        <form method="POST" autocomplete="off" class="well form-horizontal bv-form" novalidate="novalidate" action="{% url 'Accounts:UserSignup' %}" id="transac_form" data-cities-url="{% url 'Accounts:AjaxPlaces' %}">
+            {% csrf_token %}
+            <fieldset>
+            
+            <!-- Form Name -->
+            <legend><center><h2><b>User Registration</b></h2></center></legend><br>
+            
+            <!-- Text input-->
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">Name</label>  
+                <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="txtUname" placeholder="Name" class="form-control" type="text" data-bv-field="txt_name"><i class="form-control-feedback" data-bv-icon-for="txt_name" style="display: none;"></i>
+                </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="txt_name" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="txt_name" class="help-block" style="display: none;">Please enter your Name</small></div>
+            </div>
+            
+            <!-- Text input-->
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">Contact</label> 
+                <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input name="txtUcontact" placeholder="Contact" class="form-control" type="text" data-bv-field="txt_contact"><i class="form-control-feedback" data-bv-icon-for="txt_contact" style="display: none;"></i>
+                </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="txt_contact" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="txt_contact" class="help-block" style="display: none;">Please enter contact</small></div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">E-Mail</label>  
+                <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input name="txtUemail" id="txtHemail" placeholder="E-Mail Address" class="form-control" type="text" data-bv-field="email"><i class="form-control-feedback" data-bv-icon-for="email" style="display: none;"></i>
+                </div>
+                <small data-bv-validator="notEmpty" data-bv-validator-for="email" class="help-block" style="display: none;">Please enter your Email Address</small><small data-bv-validator="emailAddress" data-bv-validator-for="email" class="help-block" style="display: none;">Please enter a valid Email Address</small></div>
+            </div>
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">Place</label> 
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="txtUPlace" placeholder="Place" class="form-control" type="text" data-bv-field="txt_place"><i class="form-control-feedback" data-bv-icon-for="txt_place" style="display: none;"></i>
+                    </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="txt_place" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="txt_place" class="help-block" style="display: none;">Please enter place</small></div>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">Gender</label> 
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <input type="radio" id="male" name="Ugender" value="Male" data-bv-field="txt_gender">&nbsp;&nbsp;Male&nbsp;&nbsp;
+                        <input type="radio" id="female" name="Ugender" value="FeMale">&nbsp;&nbsp;Female
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">User name</label>  
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="txtUsername" id="txtUsername" placeholder="Username" class="form-control" type="text" data-bv-field="txt_Username"><i class="form-control-feedback" data-bv-icon-for="txt_Username" style="display: none;"></i>
+                    </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="txt_Username" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="txt_Username" class="help-block" style="display: none;">Please enter Username</small></div>
+            </div>
+            
+            <!-- Text input-->
+            
+            <div class="form-group has-feedback">
+                <label class="col-md-4 control-label">Password</label> 
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="txtPassword" id="txtPassword" placeholder="Password" class="form-control" type="password" data-bv-field="txt_Password"><i class="form-control-feedback" data-bv-icon-for="txt_Password" style="display: none;"></i>
+                    </div>
+                <small data-bv-validator="stringLength" data-bv-validator-for="txt_Password" class="help-block" style="display: none;">This value is not valid</small><small data-bv-validator="notEmpty" data-bv-validator-for="txt_Password" class="help-block" style="display: none;">Please enter the Password</small></div>
+            </div>
+        
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4"><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-warning">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register Now <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                </div>
+            </div>
+            
+            </fieldset>
+  <input type="hidden" value=""></form>
+  </div>
+      <!-- /.container -->
+      <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
+      <script id="rendered-js">
+        $(document).ready(function () {
+            $('#transac_form').bootstrapValidator({
+               
+            // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh' },
+        
+            fields: {
+                txt_name: {
+                validators: {
+                    stringLength: {
+                    min: 2 },
+        
+                    notEmpty: {
+                    message: 'Please enter the Name' } } },
+
+                txt_contact: {
+                validators: {
+                    stringLength: {
+                    min: 2 },
+        
+                    notEmpty: {
+                    message: 'Please enter the contact' } } },
+        
+                user_name: {
+                validators: {
+                    stringLength: {
+                    min: 8 },
+        
+                    notEmpty: {
+                    message: 'Please enter the Username' } } },
+        
+                txt_Password: {
+                validators: {
+                    stringLength: {
+                    min: 8 },
+        
+                    notEmpty: {
+                    message: 'Please enter the Password' } } },
+        
+                email: {
+                validators: {
+                    notEmpty: {
+                    message: 'Please enter the Email Address' },
+        
+                    emailAddress: {
+                    message: 'Please enter a valid Email Address' } } },
+        
+                } }).
+                alert("hi");
+            on('success.form.bv', function (e) {
+                alert("hii")
+            $('#success_message').slideDown({ opacity: "show" }, "slow"); // Do something ...
+            $('#transac_form').data('bootstrapValidator').resetForm();
+        
+            // Prevent form submission
+            e.preventDefault();
+        
+            // Get the form instance
+            var $form = $(e.target);
+        
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+        
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function (result) {
+                console.log(result);
+            }, 'json');
+            });
+        });
+        //# sourceURL=pen.js
+        function LoadPlace(did){
+            var url = $("#transac_form").attr("data-cities-url");  
+            var districtSelected = did 
+            //alert(districtSelected)
+            $.ajax({                      
+            url: url,                   
+            data: {
+                'districtid': districtSelected       
+            },
+            success: function (data) { 
+                $("#slctPlace").html(data);  
+            }
+            });
+        }
+</script>
+<script>
+    $('form').attr('autocomplete','off');
+</script>
+</body></html>
