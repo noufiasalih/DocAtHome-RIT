@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from MasterEntry.models import District,Place,HospitalType
 from .models import Hospital, Users
@@ -43,8 +43,18 @@ def Userlogin(request):
 
 def Login(request):
     if request.method=='POST':
-        hospitalObject=Hospital.objects.get(hospital_username=request.POST.get("txtUsername"))
-        if hospitalObject.hospital_password==request.POST.get("txtPassword") and hospitalObject.hospital_status==1:
+        hospitalDataCount=Hospital.objects.filter(hospital_username=request.POST.get("txtUsername"),hospital_password=request.POST.get("txtPassword")).count()
+        usersDataCount=Users.objects.filter(users_username=request.POST.get("txtUsername"),users_password=request.POST.get("txtPassword")).count()
+        
+        
+   # if request.method=='POST':
+        #hospitalObject=Hospital.objects.get(hospital_username=request.POST.get("txtUsername"))
+        if hospitalDataCount>0:
+        #if hospitalObject.hospital_password==request.POST.get("txtPassword") and hospitalObject.hospital_status==1:
+            hospitalobj = get_object_or_404(Hospital, hospital_username=request.POST.get("txtUsername"),hospital_password=request.POST.get("txtPassword"))
+            request.session["hospitalid"]=hospitalobj.id
+            request.session["hospitalname"]=hospitalobj.hospital_name
+            return redirect("/hospital/Homepage/")
             request.session["sessionHospitalId"]=hospitalObject.id
             request.session["sessionHospitalname"]=hospitalObject.hospital_name
             context={
@@ -54,10 +64,18 @@ def Login(request):
             template=loader.get_template("Hospital/HomePage.html")
             
             return HttpResponse(template.render(context,request))
-        else:
-            return HttpResponse("Your Username and password didn't Match")
-    else:
-        return render(request,"Accounts/Login.html",{})
+       # else:
+           # return HttpResponse("Your Username and password didn't Match")
+    #else:
+       # return render(request,"Accounts/Login.html",{})
+        elif usersDataCount>0:
+            usersobj = get_object_or_404(Users, user_username=request.POST.get("txtUsername"),user_password=request.POST.get("txtPassword"))
+            request.session["userid"]=usersobj.id
+            request.session["username"]=usersobj.users_name
+            return redirect("/user/homepage/")
+        else: 
+            return HttpResponse("Invalid Data")
+    return render(request,"Accounts/Login.html",{})
 
 #-------------------------------------------------------------------------------------------------
 
