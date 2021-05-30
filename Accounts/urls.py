@@ -3,7 +3,7 @@ from Accounts import views
 
 app_name="Accounts"
 urlpatterns = [
-    path("hospitalLogin/",views.Login,name="login"),
+    path("login/",views.Login,name="login"),
     path("HospitalRegistration/",views.RegisterHospital,name="HospitalSignup"),
     path("Ajax_load_place/",views.AjaxPalce,name="AjaxPlaces"),
     path("UserRegistration/",views.RegisterUser,name="UserSignup"),

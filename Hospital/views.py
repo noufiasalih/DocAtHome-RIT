@@ -5,13 +5,13 @@ from django.shortcuts import redirect
 
 def Homepage(request):
     if 'sessionHospitalId' not in request.session:
-        return redirect('/accounts/hospitalLogin')
+        return redirect('/accounts/login')
     else :
         return render(request,"Hospital/HomePage.html",{})
 
 def ViewProfile(request):
     if 'sessionHospitalId' not in request.session:
-        return redirect('/accounts/hospitalLogin')
+        return redirect('/accounts/login')
     else :
         HospitalData=Hospital.objects.get(id=request.session["sessionHospitalId"])
         placeData=Place.objects.get(id=HospitalData.hospital_place_id)

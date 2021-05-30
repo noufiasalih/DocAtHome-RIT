@@ -5,16 +5,17 @@ from Accounts.models import Users
 from MasterEntry.models import Place
 
 def Homepage(request):
-    if 'sessionUsersId' not in request.session:
+    print("user homepage")
+    if 'userid' not in request.session:
         return redirect('/accounts/userLogin')
     else :
         return render(request,"user/HomePage.html",{})
 
 def ViewProfile(request):
-    if 'sessionUsersId' not in request.session:
+    if 'userid' not in request.session:
         return redirect('/accounts/userLogin')
     else :
-        UserData=Users.objects.get(id=request.session["sessionUsersId"])
+        UserData=Users.objects.get(id=request.session["userid"])
         context={
             "UserName":UserData.user_name,
             "UserContact":UserData.user_contact,

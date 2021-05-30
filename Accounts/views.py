@@ -44,26 +44,28 @@ def Userlogin(request):
 def Login(request):
     if request.method=='POST':
         hospitalDataCount=Hospital.objects.filter(hospital_username=request.POST.get("txtUsername"),hospital_password=request.POST.get("txtPassword")).count()
-        usersDataCount=Users.objects.filter(users_username=request.POST.get("txtUsername"),users_password=request.POST.get("txtPassword")).count()
-        
+        usersDataCount=Users.objects.filter(user_username=request.POST.get("txtUsername"),user_password=request.POST.get("txtPassword")).count()
+        print(hospitalDataCount)
+        print(usersDataCount)
         
    # if request.method=='POST':
         #hospitalObject=Hospital.objects.get(hospital_username=request.POST.get("txtUsername"))
         if hospitalDataCount>0:
         #if hospitalObject.hospital_password==request.POST.get("txtPassword") and hospitalObject.hospital_status==1:
             hospitalobj = get_object_or_404(Hospital, hospital_username=request.POST.get("txtUsername"),hospital_password=request.POST.get("txtPassword"))
-            request.session["hospitalid"]=hospitalobj.id
-            request.session["hospitalname"]=hospitalobj.hospital_name
-            return redirect("/hospital/Homepage/")
-            request.session["sessionHospitalId"]=hospitalObject.id
-            request.session["sessionHospitalname"]=hospitalObject.hospital_name
-            context={
-                'Hospitalid':request.session["sessionHospitalId"],
-                'Hospitalname': request.session["sessionHospitalname"],
-            }
-            template=loader.get_template("Hospital/HomePage.html")
+            request.session["sessionHospitalId"]=hospitalobj.id
+            request.session["sessionHospitalname"]=hospitalobj.hospital_name
+            print(request.session["sessionHospitalId"])
+            return redirect('/hospital/HomePage/')
+            # request.session["sessionHospitalId"]=hospitalObject.id
+            # request.session["sessionHospitalname"]=hospitalObject.hospital_name
+            # context={
+            #     'Hospitalid':request.session["sessionHospitalId"],
+            #     'Hospitalname': request.session["sessionHospitalname"],
+            # }
+            # template=loader.get_template("Hospital/HomePage.html")
             
-            return HttpResponse(template.render(context,request))
+            # return HttpResponse(template.render(context,request))
        # else:
            # return HttpResponse("Your Username and password didn't Match")
     #else:
@@ -71,8 +73,8 @@ def Login(request):
         elif usersDataCount>0:
             usersobj = get_object_or_404(Users, user_username=request.POST.get("txtUsername"),user_password=request.POST.get("txtPassword"))
             request.session["userid"]=usersobj.id
-            request.session["username"]=usersobj.users_name
-            return redirect("/user/homepage/")
+            request.session["username"]=usersobj.user_name
+            return redirect('/user/Homepage')
         else: 
             return HttpResponse("Invalid Data")
     return render(request,"Accounts/Login.html",{})
@@ -107,9 +109,9 @@ def RegisterHospital(request):
         hospitalObj.hospital_image=request.FILES.get("fileHImage")
         hospitalObj.hospital_username=request.POST.get("txtUsername")
         hospitalObj.hospital_password=request.POST.get("txtPassword")
-        hospitalObj.hospital_status=1
+        #hospitalObj.hospital_status=1
         hospitalObj.save()
-        return redirect('/accounts/hospitalLogin')
+        return redirect('/accounts/login')
     else:
         return render(request,"Accounts/NewHospital.html",{'DistrictRecords':DistrictRecords,'HospitalTypeRecords':HospitalTypeRecords})
         

@@ -3,7 +3,7 @@ from Hospital import views
 
 app_name="Hospital"
 urlpatterns = [
-    path('HomePage',views.Homepage,name="hospital-homepage"),
-    path('ViewProfile',views.ViewProfile,name="hospital-profile"),
+    path('HomePage/',views.Homepage,name="hospital-homepage"),
+    path('ViewProfile/',views.ViewProfile,name="hospital-profile"),
    
 ]
