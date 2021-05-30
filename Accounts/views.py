@@ -20,11 +20,8 @@ def AjaxPalce(request):
 
 #------------------------------------------------------------------------
 def Userlogin(request):
-    # print(user_username=request.POST.get("txtUsername"))
     if request.method=='POST':
-        print(request.POST.get("txtUsername1"))
         usersObject=Users.objects.get(user_username=request.POST.get("txtUsername1"))
-        # if usersObject.user_password==request.POST.get("txtPassword1") and usersObject.user_status==1:
         if usersObject.user_password==request.POST.get("txtPassword1"):
             request.session["sessionUsersId"]=usersObject.id
             request.session["sessionUsersname"]=usersObject.user_name
@@ -45,8 +42,6 @@ def Login(request):
     if request.method=='POST':
         hospitalDataCount=Hospital.objects.filter(hospital_username=request.POST.get("txtUsername"),hospital_password=request.POST.get("txtPassword")).count()
         usersDataCount=Users.objects.filter(user_username=request.POST.get("txtUsername"),user_password=request.POST.get("txtPassword")).count()
-        print(hospitalDataCount)
-        print(usersDataCount)
         
    # if request.method=='POST':
         #hospitalObject=Hospital.objects.get(hospital_username=request.POST.get("txtUsername"))
@@ -55,7 +50,6 @@ def Login(request):
             hospitalobj = get_object_or_404(Hospital, hospital_username=request.POST.get("txtUsername"),hospital_password=request.POST.get("txtPassword"))
             request.session["sessionHospitalId"]=hospitalobj.id
             request.session["sessionHospitalname"]=hospitalobj.hospital_name
-            print(request.session["sessionHospitalId"])
             return redirect('/hospital/HomePage/')
             # request.session["sessionHospitalId"]=hospitalObject.id
             # request.session["sessionHospitalname"]=hospitalObject.hospital_name

@@ -5,7 +5,6 @@ from Accounts.models import Users
 from MasterEntry.models import Place
 
 def Homepage(request):
-    print("user homepage")
     if 'userid' not in request.session:
         return redirect('/accounts/userLogin')
     else :
