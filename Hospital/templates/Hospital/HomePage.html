@@ -12,8 +12,16 @@
             <legend><center><h2>Welcome <b>{{ request.session.sessionHospitalname }}</b> </h2></center></legend><br>
             <br>
             <b>Hospital Portal</b>
-            <a href="{% url 'Hospital:hospital-homepage'%}">Homepage</a>
-            <a href="{% url 'Hospital:hospital-profile'%}">View Profile</a>
+            <a href="{% url 'Hospital:hospital-homepage'%}">Homepage</a>&nbsp; |
+            <a href="{% url 'Hospital:hospital-profile'%}">View Profile</a>&nbsp; |
+            <a href="{% url 'Hospital:daily-services'%}">Manage Daily Services</a>&nbsp; |
+            <a href="{% url 'Hospital:services-packages'%}">Service Packages</a>&nbsp; |
+            <a href="{% url 'Hospital:services-staffs'%}">Service Staffs</a>&nbsp; |
+            <a href="{% url 'Hospital:view-daily-services'%}">View Daily Services</a>&nbsp; |
+            <a href="{% url 'Hospital:view-packages'%}">View Packages</a>&nbsp; |
+            <a href="{% url 'Hospital:view-staffs'%}">View Staffs</a>&nbsp; |
+            <a href="{% url 'Hospital:user-add-complaint'%}">Add Complaint</a>&nbsp; |
+            <a href="{% url 'Hospital:user-complaints'%}">View User Complaints</a>
         </form>
     </div>
   </body>

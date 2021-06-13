@@ -9,4 +9,6 @@ urlpatterns = [
     path("RejectingingHospital/<int:id>",views.RejectHospital,name="reject-hospitals"),
     path("ViewAcceptedHospitals/",views.AcceptedHospitalList,name="accepted-hospital-list"),
     path("ViewRejectedHospitals/",views.RejectedHospitalList,name="rejected-hopital-list"),
+    path("ViewUsersComplaints/",views.ViewUsersComplaints,name="view-user-complaints"),
+    path("ViewHospitalComplaints/",views.ViewHospitalComplaints,name="view-hospital-complaints")
 ]

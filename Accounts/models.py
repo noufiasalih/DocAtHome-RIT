@@ -15,6 +15,9 @@ class Hospital(models.Model):
     hospital_status=models.IntegerField(default=0)
     hospital_doj=models.DateField(auto_now_add=True)
 
+    def __str__(self):
+        return self.hospital_name
+
 class Users(models.Model):
     user_name=models.CharField(max_length=10,default=True)
     user_contact=models.CharField(max_length=20,default=True)
@@ -26,4 +29,6 @@ class Users(models.Model):
     user_password=models.CharField(max_length=20,default=True)
     user_status=models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.user_name
     

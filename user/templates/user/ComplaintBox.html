@@ -7,19 +7,33 @@
 </head>
 <body>
     <form action="" method="post">
-    {% csrf_token %}
+        {% csrf_token %}
+    
+
     <table align="center" cellpadding="10" border="1" style="border-collapse: collapse;">
+       
+        <tr>
+            <td>Mobile Hospital</td>
+            <td>
+                <select name="slctMobileHospital" id="">
+                    <option value="">---Select---</option>
+                    {% for data  in  mobileHospitalData %}
+                      <option value="{{ data.id }}">{{ data.service_no }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
         <tr>
             <td>Complaint Type</td>
             <td>
                 <select name="slctComplaintType" id="">
                     <option value="">---Select---</option>
-                    {% for data  in  Complainttype %}
+                    {% for data  in  ComplaintType %}
                       <option value="{{ data.id }}">{{ data.complainttype_name }}</option>
                     {% endfor %}
                 </select>
             </td>
-        </tr>
+        </tr>    
         <tr>
             <td>Content</td>
             <td><textarea name="txtcontent" id="" cols="30" rows="10"></textarea></td>
@@ -30,5 +44,6 @@
             </td>
         </tr>
     </table>
+    
 </body>
 </html>

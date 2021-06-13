@@ -19,51 +19,20 @@ def AjaxPalce(request):
 
 
 #------------------------------------------------------------------------
-def Userlogin(request):
-    if request.method=='POST':
-        usersObject=Users.objects.get(user_username=request.POST.get("txtUsername1"))
-        if usersObject.user_password==request.POST.get("txtPassword1"):
-            request.session["sessionUsersId"]=usersObject.id
-            request.session["sessionUsersname"]=usersObject.user_name
-            context={
-                'Usersid':request.session["sessionUsersId"],
-                'Usersname': request.session["sessionUsersname"],
-            }
-            template=loader.get_template("user/Homepage.html")
-            
-            return HttpResponse(template.render(context,request))
-        else:
-            return HttpResponse("Your Username and password didn't Match")
-    else:
-        return render(request,"Accounts/Userlogin.html")
-#---------------------------------------------------------------------------
+
 
 def Login(request):
     if request.method=='POST':
         hospitalDataCount=Hospital.objects.filter(hospital_username=request.POST.get("txtUsername"),hospital_password=request.POST.get("txtPassword")).count()
         usersDataCount=Users.objects.filter(user_username=request.POST.get("txtUsername"),user_password=request.POST.get("txtPassword")).count()
-        
-   # if request.method=='POST':
-        #hospitalObject=Hospital.objects.get(hospital_username=request.POST.get("txtUsername"))
+        print(hospitalDataCount)
         if hospitalDataCount>0:
-        #if hospitalObject.hospital_password==request.POST.get("txtPassword") and hospitalObject.hospital_status==1:
+     
             hospitalobj = get_object_or_404(Hospital, hospital_username=request.POST.get("txtUsername"),hospital_password=request.POST.get("txtPassword"))
             request.session["sessionHospitalId"]=hospitalobj.id
             request.session["sessionHospitalname"]=hospitalobj.hospital_name
-            return redirect('/hospital/HomePage/')
-            # request.session["sessionHospitalId"]=hospitalObject.id
-            # request.session["sessionHospitalname"]=hospitalObject.hospital_name
-            # context={
-            #     'Hospitalid':request.session["sessionHospitalId"],
-            #     'Hospitalname': request.session["sessionHospitalname"],
-            # }
-            # template=loader.get_template("Hospital/HomePage.html")
-            
-            # return HttpResponse(template.render(context,request))
-       # else:
-           # return HttpResponse("Your Username and password didn't Match")
-    #else:
-       # return render(request,"Accounts/Login.html",{})
+            return redirect('/hospital/HomePage')
+   
         elif usersDataCount>0:
             usersobj = get_object_or_404(Users, user_username=request.POST.get("txtUsername"),user_password=request.POST.get("txtPassword"))
             request.session["userid"]=usersobj.id

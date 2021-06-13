@@ -6,6 +6,50 @@
     <title>Document</title>
 </head>
 <body>
+
+<form action="" method="post">
+        {% csrf_token %}
     
+
+    <table align="center" cellpadding="10" border="1" style="border-collapse: collapse;">
+        <tr>
+            <td>Code</td>
+            <td><input type="text" name="txtPackageCode"></td>
+        </tr>
+        <tr>
+            <td>Type</td>
+            <td>
+                <select name="slctServiceType" id="">
+                    <option value="">---Select---</option>
+                    {% for data  in  ServiceTypes %}
+                      <option value="{{ data.id }}">{{ data.servicetype_name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Rate</td>
+            <td><input type="text" name="txtPackageRate"></td>
+      
+        <tr>
+            <tr>
+                <td>Duration</td>
+                <td><input type="text" name="txtDuration">(In Days)</td>
+          
+            <tr>
+            <td>Facilities</td>
+            <td><textarea name="txtFacilitites" id="" cols="30" rows="10"></textarea></td>
+        </tr>
+        <tr>
+            <td>KM/Rate</td>
+            <td><input type="text" name="txtKmRate"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="btnSave" value="Add Package">
+            </td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>

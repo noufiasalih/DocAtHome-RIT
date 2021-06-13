@@ -3,7 +3,8 @@ from user import views
 
 app_name="user"
 urlpatterns = [
-    path('Homepage',views.Homepage,name="user-homepage"),
-    path('ViewProfile',views.ViewProfile,name="user-profile")
+    path('Homepage/',views.Homepage,name="user-homepage"),
+    path('ViewProfile/',views.ViewProfile,name="user-profile"),
+    path('AddComplaints/',views.AddComplaints,name="user-complaints")
    
 ]

@@ -9,8 +9,9 @@
             <legend><center><h2>Welcome <b>{{ request.session.sessionUsername }}</b> </h2></center></legend><br>
             <br>
             <b>User Portal</b>
-            <a href="{% url 'user:user-homepage'%}">Homepage</a>
-            <a href="{% url 'user:user-profile'%}">View Profile</a>
+            <a href="{% url 'user:user-homepage'%}">Homepage</a>&nbsp; |
+            <a href="{% url 'user:user-profile'%}">View Profile</a>&nbsp; |
+            <a href="{% url 'user:user-complaints'%}">Add Complaints</a>
         </form>
     </div>
   </body>

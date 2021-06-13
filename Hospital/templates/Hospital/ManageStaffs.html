@@ -6,6 +6,86 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <form method="POST" enctype="multipart/form-data" action="" id="transac_form" data-cities-url="{% url 'Accounts:AjaxPlaces' %}">
+    {% csrf_token %}
+    <table align="center" style="border-collapse: collapse;" border="1" cellpadding="10">
+        <tr>
+            <td>Staff Code</td>
+            <td><input type="text" name="txtStaffCode"></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="txtStaffName"></td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td><input type="text" name="txtContact"></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>
+                <input type="radio" name="rdbGender" value="Male">Male
+                <input type="radio" name="rdbGender" value="FeMale">FeMale
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="email" name="txtEmail"></td>
+        </tr>
+        <tr>
+            <td>Designation</td>
+            <td>
+                <select name="slctDesignation" id="slctDesignation">
+                    <option>---Select---</option>
+                    
+                    {% for DesignationData in ServiceDesignations %}
+                    
+                    <option value="{{ DesignationData.id }}">{{ DesignationData.service_designation }}</option>
+                    
+                    {% endfor %}
+                
+                </select>
+            </td>
+        </tr>
+     
+       
+        <tr>
+            <td>Photo</td>
+            <td><input type="file" name="fileStaffPhoto" id="fileStaffPhoto"></td>
+        </tr>
+        <tr>
+            <td>User name</td>
+            <td><input type="text" name="txtUsername" id="txtUsername"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="text" name="txtPassword" id="txtPassword"></td>
+        </tr>
+
+     
+        <tr>
+            <td colspan="2"><input type="submit" value="Register Now"></td>
+        </tr>
+    </table>
+    {{Message}}
+    </form>
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
